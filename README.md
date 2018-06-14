@@ -4,30 +4,28 @@
 - Cover with tests all endpoint
 
 ### Description
-Application can help you if you should send push notification to some user,
-and user have more then one device.  
-Application can store user tokens and then used it for sending push notifications.
-User can send personal token to push-service, registering him, then send different token again 
-from another device. After that, if we will send notification to this user, notification will be sent to all user's device.   
-Also, all history of sent push notifications is storing.
-Available option to confirm the read of push notification.
+Application can help you if you should send push notification to some user, and user have more then one device.  
+Application can store user tokens and then used it for sending push notifications.  
+User can send personal token to push-service, registering him, then send different token again from another device. After that, if we will send notification to this user, notification will be sent to all user's device.   
+Also, all history of sent push notifications is storing.  
+Available option to confirm the read of push notification.  
 
 ### Dependencies
 Databases required to provide service working:
 
 - PostgreSQL 
 
-DB should running local, inside another Docker container, or on external server.
-For postgres you should create DB.
-If you have postgres and redis running you should provide HOST name, PORT and other data to connect in environment.
-Details about environment are below.
-Also you should have Firebase project.
+DB should running local, inside another Docker container, or on external server.  
+For postgres you should create DB.  
+If you have postgres and redis running you should provide HOST name, PORT and other data to connect in environment.  
+Details about environment are below.  
+Also you should have Firebase project.  
 
 ### Firebase
-For make service working you should have Firebase project and service account key. Push-service could send message only in device registered in your project.
-If you don't have, visit official firebase tutorial:
-https://firebase.google.com/docs/admin/setup#add_firebase_to_your_app
-After this instructions, you should have ``` serviceAccountKey.json ``` file (name could be different).
+For make service working you should have Firebase project and service account key. Push-service could send message only in device registered in your project.  
+If you don't have, visit official firebase tutorial:  
+https://firebase.google.com/docs/admin/setup#add_firebase_to_your_app   
+After this instructions, you should have ``` serviceAccountKey.json ``` file (name could be different).  
 Example:
 ```json
 {
@@ -44,8 +42,8 @@ Example:
 }
 ```
 After that, you should provide this information in environment variables to push-service.   
-It two option available, provide whole json in one ENV variable, or in several.
-Also you should provide ``` databaseURL ``` available in page where you have created service account key.
+It two option available, provide whole json in one ENV variable, or in several.  
+Also you should provide ``` databaseURL ``` available in page where you have created service account key.  
 ### All available environment
 ``` NODE_ENV ``` (default: 'development')  
 ``` PORT ``` (default: 80)   
@@ -60,10 +58,10 @@ Also you should provide ``` databaseURL ``` available in page where you have cre
 ``` FIREBASE_DRYRUN ``` if you wan't just test  
 ``` FIREBASE_TTL ``` ttl of push  
 
-Service account key could be provided like JSON in one ENV variable:  
+##### Service account key could be provided like JSON in one ENV variable:  
 ``` SERVICE_ACCOUNT ``` 
 
-Or service account key could be provided by several ENV variables, each variable is appropriate field in JSON.  
+##### Or service account key could be provided by several ENV variables, each variable is appropriate field in JSON.  
 ``` TYPE ```  
 ``` PROJECT_ID ```  
 ``` PRIVATE_KEY_ID ```  
@@ -78,10 +76,10 @@ Or service account key could be provided by several ENV variables, each variable
 
 ### commands to start
 ``` npm run db:prod ``` - reinitialize DB (drop and recreate)   
-``` npm run start:prod ``` - just start server (if DB was initialized) 
+``` npm run start:prod ``` - just start server (if DB was initialized)  
 ``` npm run db+start:prod ``` - initialize DB (without recreate) and start server  
 
-To make service working you should make first start with ``` npm run db:prod ``` command to initialize DB, after that you should restart container with ```npm run start:prod``` command to make service running.
+To make service working you should make first start with ``` npm run db:prod ``` command to initialize DB, after that you should restart container with ```npm run start:prod``` command to make service running.  
 Or you can start service with one command: ``` npm run db+start:prod ```
 
 ### logs
@@ -121,7 +119,7 @@ push-service:
 
 ```
 
-And with single firebase ENV configuration:
+And with single firebase ENV configuration:  
 
 ```yml
 push-service:
