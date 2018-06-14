@@ -34,13 +34,13 @@ Example:
   "type": "service_account",
   "project_id": "example",
   "private_key_id": "example_example_fbs2b13fa4dd59fee43ef36",
-  "private_key": "-----BEGIN PRIVATE KEY-----\nEXAMPLE_EXAMPLE_EXAMPLEEFJtMzCAbttlM30VvUG/QP4uDwjeBgs=\n-----END PRIVATE KEY-----\n",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nEXAMPLEs=\n-----END PRIVATE KEY-----\n",
   "client_email": "example@example.iam.gserviceaccount.com",
   "client_id": "0000000000000000000000",
   "auth_uri": "https://accounts.google.com/o/oauth2/auth",
   "token_uri": "https://accounts.google.com/o/oauth2/token",
   "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
-  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/firebase-adminsdk-example.iam.gserviceaccount.com"
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/example.com"
 }
 ```
 After that, you should provide this information in environment variables to push-service.   
