@@ -1,5 +1,7 @@
-# Application to send PUSH notifications via Firebase service.
+## Application to send PUSH notifications via Firebase service.
 ### TODO
+- Make Swagger documentation
+- Cover with tests all endpoint
 
 ### Description
 Application can help you if you should send push notification to some user,
