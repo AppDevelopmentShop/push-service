@@ -20,6 +20,7 @@ export default async function (user, info) {
         err
       })
       user.tokens[i].sent = false
+      user.tokens[i].message = err.message
     }
   }
 }

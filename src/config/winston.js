@@ -31,7 +31,7 @@ const options = {
   }
 }
 
-// IF DRYRUN ENABLED LOG CONFIGURATION IS EMPTY
+// IF DRYRUN ENABLED THEN LOG CONFIGURATION IS EMPTY
 const logger = DRYRUN ? new winston.Logger({}) : new winston.Logger({
   transports: [
     new winston.transports.File(options.error),

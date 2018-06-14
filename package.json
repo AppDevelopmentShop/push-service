@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "private": false,
   "scripts": {
-    "st art": "babel-node ./src/index.js",
+    "start": "babel-node ./src/index.js",
     "test": "NODE_ENV=test PORT=2084 babel-node ./node_modules/mocha/bin/_mocha ./test/**/*.test.js --exit",
     "build": "babel src --out-dir lib/src --source-maps --copy-files",
     "knex": "babel-node node_modules/.bin/knex --knexfile=./src/db/knexfile.js",
@@ -15,7 +15,6 @@
     "db+start:prod": "npm run db:prod && npm run start:prod",
     "build:test": "babel test --out-dir lib/test --source-maps --copy-files",
     "start:test": "NODE_ENV=test PORT=2084 node ./node_modules/mocha/bin/_mocha --exit lib/test"
-
   },
   "keywords": [
     "push",

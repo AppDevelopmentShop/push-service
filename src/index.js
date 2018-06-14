@@ -5,6 +5,7 @@ import bodyParser from 'koa-bodyparser'
 import router from './services/api/routes'
 import exceptionHandler from './utils/exceptionHandler'
 import { PORT, NODE_ENV } from './config/env.config'
+import logger from './config/winston'
 
 const app = new Koa()
 
@@ -14,6 +15,6 @@ app
   .use(router.routes())
 
 export default app.listen(PORT, () => {
-  console.log(`HTTP Server listening on port: ${PORT}`)
-  console.log(`Environment: ${NODE_ENV}`)
+  logger.debug(`HTTP Server listening on port: ${PORT}`)
+  logger.debug(`Environment: ${NODE_ENV}`)
 })

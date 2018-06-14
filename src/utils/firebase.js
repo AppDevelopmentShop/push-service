@@ -1,20 +1,23 @@
+import fs from 'fs'
+import appRoot from 'app-root-path'
 import * as admin from 'firebase-admin/lib/index'
-import serviceAccount from '../config/serviceAccountKey.json'
 import {
   FIREBASE_DB,
   FIREBASE_COLOR,
   FIREBASE_DRYRUN,
-  FIREBASE_TTL
+  FIREBASE_TTL,
+  FIREBASE_ACC
 } from '../config/env.config'
 
+const serviceAccount = FIREBASE_ACC ? FIREBASE_ACC :fs.readFileSync(`${appRoot}/src/config/serviceAccountKey.json`);
+
 admin.initializeApp({
-  credential: admin.credential.cert(serviceAccount),
+  credential: admin.credential.cert(JSON.parse(serviceAccount)),
   databaseURL: FIREBASE_DB
 })
 
 async function send (info, token) {
   const message = {
-    data: info.payload,
     notification: {
       title: info.title,
       body: info.body,
@@ -28,11 +31,14 @@ async function send (info, token) {
     apns: {
       payload: {
         aps: {
-          badge: 0,
+          badge: 42,
         },
       },
     },
     token: token
+  }
+  if (info.payload) {
+    message.data = info.payload
   }
   return admin.messaging().send(message, FIREBASE_DRYRUN)
 }
