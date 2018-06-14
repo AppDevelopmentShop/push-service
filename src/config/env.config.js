@@ -1,7 +1,12 @@
 export const NODE_ENV = process.env.NODE_ENV || 'development'
 export const PORT = process.env.PORT || 80
-export const PG_DB = process.env.PG_DB || ''
-export const PG_USER = process.env.PG_USER || ''
-export const PG_PASSWORD = process.env.PG_PASSWORD || ''
+export const DRYRUN = process.env.DRYRUN || false
+export const PG_DB = process.env.PG_DB || 'push_db'
+export const PG_USER = process.env.PG_USER || 'push'
+export const PG_PASSWORD = process.env.PG_PASSWORD || '12345678'
 export const PG_HOST = process.env.PG_HOST || 'localhost'
 export const PG_PORT = process.env.PG_PORT || '5432'
+export const FIREBASE_DB = process.env.FIREBASE_DB || ''
+export const FIREBASE_COLOR = process.env.FIREBASE_COLOR || ''
+export const FIREBASE_DRYRUN = process.env.FIREBASE_DRYRUN || false
+export const FIREBASE_TTL = process.env.FIREBASE_TTL || false

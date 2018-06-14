@@ -1,7 +1,7 @@
 import { TABLES } from '../connection'
 
 export const up = (knex) => {
-  return knex.schema.createTable(TABLES.HISTORY, (table) => {
+  return knex.schema.createTable(TABLES.NOTIFICATIONS, (table) => {
     table.increments()
     table.integer('user_id').references(`${TABLES.USERS}.id`).notNullable()
     table.integer('status_id').references(`${TABLES.STATUSES}.id`).notNullable()
@@ -16,5 +16,5 @@ export const up = (knex) => {
 }
 
 export const down = (knex, Promise) => {
-  return knex.schema.dropTable(TABLES.HISTORY)
+  return knex.schema.dropTable(TABLES.NOTIFICATIONS)
 }

@@ -1,26 +1,28 @@
 import * as admin from 'firebase-admin/lib/index'
-import serviceAccount from '../../../config/serviceAccountKey.json'
-import conf from '../../config'
+import serviceAccount from '../config/serviceAccountKey.json'
+import {
+  FIREBASE_DB,
+  FIREBASE_COLOR,
+  FIREBASE_DRYRUN,
+  FIREBASE_TTL
+} from '../config/env.config'
 
 admin.initializeApp({
   credential: admin.credential.cert(serviceAccount),
-  databaseURL: process.env.FIREBASE_DB || conf.get('firebase:db')
+  databaseURL: FIREBASE_DB
 })
 
-export async function send (info, token) {
+async function send (info, token) {
   const message = {
-    data: {
-      destination: info.destination
-    },
+    data: info.payload,
     notification: {
       title: info.title,
       body: info.body,
     },
     android: {
-      ttl: info.ttl || 3600 * 1000,
+      ttl: info.ttl || FIREBASE_TTL,
       notification: {
-        // icon: info.icon || 'stock_ticker_update',
-        color: info.color || '#76BB2B',
+        color: info.color || FIREBASE_COLOR,
       },
     },
     apns: {
@@ -32,9 +34,9 @@ export async function send (info, token) {
     },
     token: token
   }
-  let dryRun = conf.get('dryRun')
-  if (process.env.NODE_ENV === 'production') {
-    dryRun = false
-  }
-  return admin.messaging().send(message, dryRun)
+  return admin.messaging().send(message, FIREBASE_DRYRUN)
+}
+
+export default {
+  send
 }

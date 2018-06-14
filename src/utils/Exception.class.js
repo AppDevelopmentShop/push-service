@@ -7,9 +7,12 @@ export class Exception extends Error {
   get statusCode () {
     return this._statusCode
   }
+  get payload () {
+    return this._payload
+  }
   toObject () {
     const res = {
-      statusCode: this._statusCode,
+      status: this._statusCode,
       message: this.message,
     }
     if (this._payload) {

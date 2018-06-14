@@ -3,17 +3,19 @@
   "version": "1.0.0",
   "private": false,
   "scripts": {
-    "start": "babel-node ./src/index.js",
-    "build": "babel src -d dist --source-maps",
-    "knex": "babel-node node_modules/.bin/knex --knexfile=./src/knexfile.js",
-    "db:migrate": "NODE_ENV=development npm run migrate:rollback && npm run migrate:latest && npm run seed:run",
-    "migrate:latest": "npm run knex migrate:latest",
-    "migrate:rollback": "npm run knex migrate:rollback",
-    "seed:run": "npm run knex seed:run",
-    "start:docker": "NODE_ENV=development && npm run migrate:latest && npm run seed:run && npm run start",
-    "start:prod": "node dist/index.js",
-    "start:db": "npm run migrate:latest && npm run seed:run",
-    "start:admin": "node dist/modules/push/index.js"
+    "st art": "babel-node ./src/index.js",
+    "test": "NODE_ENV=test PORT=2084 babel-node ./node_modules/mocha/bin/_mocha ./test/**/*.test.js --exit",
+    "build": "babel src --out-dir lib/src --source-maps --copy-files",
+    "knex": "babel-node node_modules/.bin/knex --knexfile=./src/db/knexfile.js",
+    "db": "npm run knex migrate:rollback && npm run knex migrate:latest && npm run knex seed:run",
+    "db+start": "npm run db && npm start",
+    "knex:prod": "node node_modules/.bin/knex --knexfile=./lib/src/db/knexfile.js",
+    "db:prod": "npm run knex:prod migrate:rollback && npm run knex:prod migrate:latest && npm run knex:prod seed:run",
+    "start:prod": "node ./lib/src/index.js",
+    "db+start:prod": "npm run db:prod && npm run start:prod",
+    "build:test": "babel test --out-dir lib/test --source-maps --copy-files",
+    "start:test": "NODE_ENV=test PORT=2084 node ./node_modules/mocha/bin/_mocha --exit lib/test"
+
   },
   "keywords": [
     "push",
@@ -29,12 +31,16 @@
     "babel-plugin-transform-runtime": "^6.23.0",
     "babel-polyfill": "^6.26.0",
     "babel-preset-node8": "^1.2.0",
+    "chai": "^4.1.2",
+    "chai-http": "^4.0.0",
     "eslint": "^4.19.1",
     "eslint-config-standard": "^11.0.0",
     "eslint-plugin-import": "^2.10.0",
     "eslint-plugin-node": "^6.0.1",
     "eslint-plugin-promise": "^3.7.0",
-    "eslint-plugin-standard": "^3.0.1"
+    "eslint-plugin-standard": "^3.0.1",
+    "mocha": "^5.2.0",
+    "sinon": "^6.0.0"
   },
   "dependencies": {
     "app-root-path": "^2.0.1",

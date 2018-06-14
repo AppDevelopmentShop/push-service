@@ -1,14 +1,16 @@
 import Router from 'koa-router'
-import NotificationsRoutes from './notifications/routes'
+import UsersRoutes from './users/routes'
 
 const router = new Router()
 
-NotificationsRoutes.init(router)
+UsersRoutes.init(router)
 
 router.get('/api', async (ctx) => {
   ctx.body = {
     status: 'success',
-    message: 'push-service'
+    message: 'push-service',
+    version: '1.0.0',
+    author: 'app development shop'
   }
 })
 

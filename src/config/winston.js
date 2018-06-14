@@ -1,5 +1,6 @@
 import appRoot from 'app-root-path'
 import winston from 'winston'
+import { DRYRUN } from './env.config'
 
 const options = {
   error: {
@@ -30,7 +31,8 @@ const options = {
   }
 }
 
-const logger = new winston.Logger({
+// IF DRYRUN ENABLED LOG CONFIGURATION IS EMPTY
+const logger = DRYRUN ? new winston.Logger({}) : new winston.Logger({
   transports: [
     new winston.transports.File(options.error),
     new winston.transports.File(options.info),

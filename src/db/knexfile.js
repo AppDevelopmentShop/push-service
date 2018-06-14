@@ -11,7 +11,7 @@ module.exports = {
       directory: path.join(__dirname, 'migrations')
     },
     seeds: {
-      directory: path.join(__dirname, 'seeds', 'test')
+      directory: path.join(__dirname, 'seeds')
     }
   },
   development: {

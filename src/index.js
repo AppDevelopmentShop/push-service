@@ -1,3 +1,5 @@
+'use strict'
+
 import Koa from 'koa'
 import bodyParser from 'koa-bodyparser'
 import router from './services/api/routes'

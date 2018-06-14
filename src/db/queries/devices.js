@@ -2,19 +2,34 @@ import { TABLES as T } from '../connection'
 import knex from '../connection'
 import users from './users'
 
-async function add (user, token) {
-  let res = await users.getByToken(user)
-  if (!res || !res[0] || !res[0].id) {
-    res = await users.add(user)
+async function add (userId, token) {
+  let user = await users.getUser(userId)
+  if (!user) {
+    const res = await users.add(userId)
+    user = res[0]
   }
-  await remove(token)
+  await removeSingle(token)
   return knex(T.DEVICES)
-    .insert({ user_id: res[0].id, token })
+    .insert({ user_id: user.id, token })
     .returning('*')
 }
 
-async function remove (token) {
-  return knex(T.DEVICES).del().where({ token })
+async function remove (token, userToken) {
+  const user = await users.getUser(userToken)
+  if (!user) {
+    return null
+  }
+  return knex(T.DEVICES)
+    .del()
+    .where({ token, user_id: user.id })
+    .returning('*')
+}
+
+async function removeSingle (token) {
+  return knex(T.DEVICES)
+    .del()
+    .where({ token })
+    .returning('*')
 }
 
 export default {

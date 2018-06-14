@@ -2,19 +2,35 @@ import knexnest from 'knexnest'
 import { TABLES as T } from '../connection'
 import knex from '../connection'
 
-async function getUsersTokens (users) {
+async function getDevices (user) {
   const sql = knex
     .select({
       _id: 'u.id',
-      _tokens__token: 'ud.token'
+      _user: 'u.token',
+      _createdAt: 'u.created_at',
+      _tokens__token: 'ud.token',
+      _tokens__createdAt: 'ud.created_at',
     })
     .from(function () {
       this.from({ u: T.USERS })
-        .whereIn('u.token', users)
+        .where('u.token', user)
         .as('u')
     })
     .leftJoin({ ud: T.DEVICES }, 'ud.user_id', 'u.id')
   return knexnest(sql)
+}
+
+async function getUser (user) {
+  return knex
+    .first('id')
+    .from(T.USERS)
+    .where('token', user)
+}
+
+async function get () {
+  return knex
+    .select('*')
+    .from(T.USERS)
 }
 
 async function add (token) {
@@ -23,28 +39,9 @@ async function add (token) {
     .returning('*')
 }
 
-async function getByToken (token) {
-  return knex.select('id')
-    .from(T.USERS)
-    .where('token', token)
-}
-
-async function getByDevice (token) {
-  return knex
-    .select({
-      id: 'u.id'
-    })
-    .from(function () {
-      this.from({ d: T.DEVICES })
-        .where('d.token', token)
-        .as('d')
-    })
-    .join({u: T.USERS}, 'd.user_id', 'u.id')
-}
-
 export default {
-  getUsersTokens,
-  getByDevice,
-  getByToken,
-  add
+  getDevices,
+  getUser,
+  add,
+  get
 }
