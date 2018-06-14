@@ -5,5 +5,4 @@ npm-debug.log
 lib/
 logs/*log
 dist/
-src/config/serviceAccountKey.json
-
+src/config/serviceAccountKey*
