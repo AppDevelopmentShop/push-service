@@ -17,7 +17,7 @@ Databases required to provide service working:
 
 DB should running local, inside another Docker container, or on external server.  
 For postgres you should create DB.  
-If you have postgres and redis running you should provide HOST name, PORT and other data to connect in environment.  
+If you have postgres running, you should provide HOST name, PORT and other data to connect in environment.  
 Details about environment are below.  
 Also you should have Firebase project.  
 
@@ -47,9 +47,9 @@ Also you should provide ``` databaseURL ``` available in page where you have cre
 ### All available environment
 ``` NODE_ENV ``` (default: 'development')  
 ``` PORT ``` (default: 80)   
-``` PG_DB ```  
-``` PG_USER ```  
-``` PG_PASSWORD ```  
+``` PG_DB ``` (default: 'push_db')  
+``` PG_USER ``` (default: 'push')  
+``` PG_PASSWORD ``` (default: '12345678')  
 ``` PG_HOST ``` (default: 'localhost')  
 ``` PG_PORT ``` (default: '5432')  
 
