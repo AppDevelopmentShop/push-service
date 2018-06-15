@@ -8,11 +8,11 @@
     "build": "babel src --out-dir lib/src --source-maps --copy-files",
     "knex": "babel-node node_modules/.bin/knex --knexfile=./src/db/knexfile.js",
     "db": "npm run knex migrate:rollback && npm run knex migrate:latest && npm run knex seed:run",
-    "db+start": "npm run db && npm start",
+    "db+start": "npm run knex migrate:latest && npm run knex seed:run && npm start",
     "knex:prod": "node node_modules/.bin/knex --knexfile=./lib/src/db/knexfile.js",
     "db:prod": "npm run knex:prod migrate:rollback && npm run knex:prod migrate:latest && npm run knex:prod seed:run",
     "start:prod": "node ./lib/src/index.js",
-    "db+start:prod": "npm run db:prod && npm run start:prod",
+    "db+start:prod": "npm run knex:prod migrate:latest && npm run knex:prod seed:run && npm run start:prod",
     "build:test": "babel test --out-dir lib/test --source-maps --copy-files",
     "start:test": "NODE_ENV=test PORT=2084 node ./node_modules/mocha/bin/_mocha --exit lib/test"
   },
