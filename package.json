@@ -4,7 +4,7 @@
   "private": false,
   "scripts": {
     "start": "babel-node ./src/index.js",
-    "test": "NODE_ENV=test PORT=2084 babel-node ./node_modules/mocha/bin/_mocha ./test/**/*.test.js --exit",
+    "test": "NODE_ENV=test PORT=2132 babel-node ./node_modules/mocha/bin/_mocha ./test/**/*.test.js --exit",
     "build": "babel src --out-dir lib/src --source-maps --copy-files",
     "knex": "babel-node node_modules/.bin/knex --knexfile=./src/db/knexfile.js",
     "db": "npm run knex migrate:rollback && npm run knex migrate:latest && npm run knex seed:run",

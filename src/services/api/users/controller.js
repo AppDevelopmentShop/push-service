@@ -10,11 +10,11 @@ async function unregister (ctx) {
   const { token, user } = ctx.params
   /* REMOVE TOKEN FROM DB */
   const device = await devices.remove(token, user)
-  ctx.status = 200
   if (!device || !device[0]) {
     throw new Exception(404, 'Token not found')
   }
-  ctx.body = { status: 'success', device: device[0] }
+  ctx.status = 200
+  ctx.body = { status: 'success', message: 'Device unregistered', payload: device[0] }
   logger.info('Device unregistered', { token, device: device[0] })
 }
 
@@ -25,9 +25,9 @@ async function register (ctx) {
   const { user } = ctx.params
   /* ADD TOKEN TO DB */
   const device = await devices.add(user, token)
-  ctx.status = 200
-  ctx.body = { status: 'success', device: device[0] }
-  logger.info('Device registered', { token, user, device })
+  ctx.status = 201
+  ctx.body = { status: 'success', message: 'Device registered', payload: device[0] }
+  logger.info('Device registered', { token, user, device: device[0] })
 }
 
 async function confirm (ctx) {
@@ -82,7 +82,7 @@ async function send (ctx) {
     throw new Exception(404, 'User not found')
   }
   await sendPush(tokens[0], value)
-  ctx.status = 200
+  ctx.status = 201
   ctx.body = tokens[0]
 }
 

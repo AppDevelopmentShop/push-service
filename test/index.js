@@ -12,7 +12,7 @@ export async function migrateDB () {
 }
 
 export const server = app
-export const registerModel = ['status', 'device']
+export const registerModel = ['status', 'message', 'payload']
 export const deviceModel = ['id', 'token', 'user_id', 'created_at']
 export const devicesModel = ['id', 'user', 'createdAt', 'tokens']
 export const tokenModel = ['token', 'createdAt']

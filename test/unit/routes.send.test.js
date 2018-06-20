@@ -28,7 +28,7 @@ describe(`routes : ${BASE_URL}`, () => {
         })
         .end((err, res) => {
           should.not.exist(err)
-          res.status.should.equal(200)
+          res.status.should.equal(201)
           res.type.should.equal('application/json')
           res.body.should.include.keys(devicesModel)
           res.body.tokens.length.should.eql(1)
@@ -45,7 +45,7 @@ describe(`routes : ${BASE_URL}`, () => {
         })
         .end((err, res) => {
           should.not.exist(err)
-          res.status.should.equal(200)
+          res.status.should.equal(201)
           res.type.should.equal('application/json')
           res.body.should.include.keys(devicesModel)
           res.body.tokens.length.should.eql(2)
