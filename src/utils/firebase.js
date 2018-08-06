@@ -47,7 +47,6 @@ if (NODE_ENV === 'development') {
   }
 }
 
-
 // INITIALIZE FIREBASE ADMIN BUT NOT IN TEST
 if (NODE_ENV !== 'test') {
   admin.initializeApp({
@@ -56,31 +55,15 @@ if (NODE_ENV !== 'test') {
   })
 }
 
-
-
 async function send (info, token) {
-  const message = {
-    notification: {
-      title: info.title,
-      body: info.body,
-    },
-    android: {
-      ttl: info.ttl || FIREBASE_TTL,
-      notification: {
-        color: info.color || FIREBASE_COLOR,
-      },
-    },
-    apns: {
-      payload: {
-        aps: {
-          badge: 0,
-        },
-      },
-    },
-    token: token
+  if (!info.payload) {
+    info.payload = {}
   }
-  if (info.payload) {
-    message.data = info.payload
+  info.payload.title = info.title
+  info.payload.body = info.body
+  const message = {
+    data: info.payload,
+    token: token
   }
   return admin.messaging().send(message, !!FIREBASE_DRYRUN)
 }
